@@ -1,5 +1,6 @@
 import { Directive } from '@angular/core';
-import { BrnTooltip, BrnTooltipPosition, provideBrnTooltipDefaultOptions } from '@spartan-ng/brain/tooltip';
+import type { BrnTooltipPosition} from '@spartan-ng/brain/tooltip';
+import { BrnTooltip, provideBrnTooltipDefaultOptions } from '@spartan-ng/brain/tooltip';
 import { hlm } from '@spartan-ng/helm/utils';
 import { cva } from 'class-variance-authority';
 

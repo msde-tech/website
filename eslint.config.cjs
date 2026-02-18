@@ -1,114 +1,67 @@
-const nx = require('@nx/eslint-plugin');
-
+/** @type {import('eslint').Linter.Config[]} */
 module.exports = [
-  ...nx.configs['flat/base'],
-  ...nx.configs['flat/typescript'],
-  ...nx.configs['flat/javascript'],
-  {
-    ignores: [
-      '**/dist',
-      '**/vite.config.ts',
-      '**/vite.config.*.timestamp*',
-      '**/vitest.config.*.timestamp*',
-    ],
-  },
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: process.cwd(),
-      },
+    {
+        ignores: [
+            'dist/',
+            'coverage/',
+            'node_modules/',
+            '.angular/',
+            '*.config.js',
+            '*.config.ts',
+        ],
     },
-    rules: {
-      '@nx/enforce-module-boundaries': [
-        'error',
-        {
-          enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
-          depConstraints: [
-            {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+    {
+        files: ['**/*.ts'],
+        languageOptions: {
+            parser: require('@typescript-eslint/parser'),
+            parserOptions: {
+                sourceType: 'module',
+                ecmaVersion: 2023,
             },
-          ],
         },
-      ],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          args: 'after-used',
-          argsIgnorePattern: '^_',
-          caughtErrors: 'none',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
+        plugins: {
+            '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
+            '@angular-eslint': require('@angular-eslint/eslint-plugin'),
         },
-      ],
-      '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-unused-expressions': 'off',
-      '@typescript-eslint/prefer-readonly': 'error',
-      '@typescript-eslint/explicit-member-accessibility': [
-        'error',
-        {
-          overrides: {
-            accessors: 'explicit',
-            constructors: 'no-public',
-            methods: 'off',
-            properties: 'explicit',
-            parameterProperties: 'off',
-          },
+        rules: {
+            '@angular-eslint/directive-selector': [
+                'error',
+                {
+                    type: 'attribute',
+                    prefix: ['app', 'hlm'],
+                    style: 'camelCase',
+                },
+            ],
+            '@angular-eslint/component-selector': [
+                'error',
+                {
+                    type: 'element',
+                    prefix: ['app', 'hlm'],
+                    style: 'kebab-case',
+                },
+            ],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                },
+            ],
+            '@typescript-eslint/consistent-type-imports': 'error',
+            '@typescript-eslint/no-explicit-any': 'warn',
         },
-      ],
-      '@typescript-eslint/naming-convention': [
-        'error',
-        {
-          selector: 'classProperty',
-          modifiers: ['private'],
-          format: ['camelCase'],
-          leadingUnderscore: 'require',
-        },
-        {
-          selector: 'classProperty',
-          modifiers: ['public'],
-          format: ['camelCase'],
-          leadingUnderscore: 'forbid',
-        },
-        {
-          selector: 'classProperty',
-          modifiers: ['protected'],
-          format: ['camelCase'],
-          leadingUnderscore: 'require',
-        },
-        {
-          selector: 'variable',
-          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-        },
-      ],
-      // this should be enabled when we move to signals
-      '@nx/workspace-prefer-rxjs-operator-compat': 'error',
-      '@nx/workspace-component-directive-key-order': 'error',
     },
-  },
-  {
-    files: ['**/*.json'],
-    rules: {
-      '@nx/dependency-checks': [
-        'error',
-        {
-          ignoredFiles: [
-            '{projectRoot}/eslint.config.{js,cjs,mjs}',
-            '{projectRoot}/**/test-setup.ts',
-            '{projectRoot}/**/*.spec.ts',
-            '{projectRoot}/**/*.stories.ts',
-          ],
+    {
+        files: ['**/*.html'],
+        languageOptions: {
+            parser: require('@angular-eslint/template-parser'),
         },
-      ],
+        plugins: {
+            '@angular-eslint/template': require('@angular-eslint/eslint-plugin-template'),
+        },
+        rules: {
+            '@angular-eslint/template/banana-in-box': 'error',
+            '@angular-eslint/template/no-negated-async': 'error',
+        },
     },
-    languageOptions: {
-      parser: require('jsonc-eslint-parser'),
-    },
-  },
 ];

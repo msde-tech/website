@@ -8,9 +8,30 @@
 /node_modules
 /stats.html
 pnpm-lock.yaml
+bun.lockb
 
 /.nx/cache
-
 /.nx/workspace-data
+
+# Generated TypeScript declaration files
+*.d.ts
+
+# Environment files
+.env*
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
 
 apps/ui-storybook/.storybook/tailwind.css

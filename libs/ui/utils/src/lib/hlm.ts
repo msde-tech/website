@@ -120,7 +120,7 @@ export function classes(computed: () => ClassValue[] | string, options: ClassesO
 	});
 }
 
-// eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
+ 
 function setupGlobalObserver(platformId: Object): void {
 	if (isPlatformBrowser(platformId) && !globalObserver) {
 		// Create single global observer that watches the entire document
