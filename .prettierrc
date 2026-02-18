@@ -1,0 +1,14 @@
+{
+  "printWidth": 120,
+  "singleQuote": true,
+  "useTabs": true,
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "tailwindFunctions": ["hlm", "cva", "classes"],
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-tailwindcss"
+  ]
+}
