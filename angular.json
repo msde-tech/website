@@ -22,14 +22,19 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src",
+                "output": "/"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"],
+            "allowedCommonJsDependencies": []
           },
           "configurations": {
             "production": {
+              "baseHref": "/website/",
               "budgets": [
                 {
                   "type": "initial",
