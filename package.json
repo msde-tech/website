@@ -25,6 +25,7 @@
     "bracketSameLine": false,
     "arrowParens": "avoid",
     "endOfLine": "lf",
+    "htmlWhitespaceSensitivity": "ignore",
     "overrides": [
       {
         "files": "*.html",

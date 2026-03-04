@@ -30,10 +30,10 @@ This project is configured with a comprehensive development setup including ESLi
 
 ## Configuration Files
 
-- **ESLint**: `eslint.config.cjs` - Angular-specific rules with spartan UI support
-- **Prettier**: Configuration in `package.json` with Angular template support
+- **ESLint**: `eslint.config.cjs` - Angular-specific rules with spartan UI support; uses `eslint-config-prettier` to avoid conflicts with Prettier
+- **Prettier**: `prettier` key in `package.json` — single quotes, 100 char line width, LF line endings, Angular HTML parser
 - **TypeScript**: `tsconfig.json` with strict settings and path mappings
-- **VS Code**: `.vscode/settings.json` with proper editor configuration
+- **Editor**: `.editorconfig` for cross-editor consistency; `.vscode/settings.json` for VS Code users
 
 ## Code Quality Standards
 
