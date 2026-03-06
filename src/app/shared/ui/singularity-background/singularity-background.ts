@@ -1,12 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  input,
-  viewChild,
-} from '@angular/core';
+import type { AfterViewInit, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, input, viewChild } from '@angular/core';
 
 interface Particle {
   x: number;
