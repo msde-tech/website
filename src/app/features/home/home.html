@@ -1,3 +1,60 @@
-<section class="min-h-screen px-4 pt-20">
-  <h1 class="text-3xl font-bold text-foreground">Home</h1>
+<!-- Hero Section -->
+<section class="flex min-h-screen flex-col items-center justify-center px-4 pt-24">
+  <div class="max-w-3xl text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+      Data Engineering &amp; Software Engineering
+    </h1>
+    <p class="mt-6 text-lg text-muted-foreground sm:text-xl">
+      Building reliable data platforms, scalable architectures, and clean code.
+    </p>
+
+    <ul class="mt-10 inline-flex flex-col gap-3 text-left text-muted-foreground">
+      <li class="flex items-center gap-3">
+        <span class="size-2 shrink-0 rounded-full bg-primary"></span>
+        Cloud Data Platforms — Azure, Databricks, Fabric
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="size-2 shrink-0 rounded-full bg-primary"></span>
+        Data Warehousing &amp; Analytics — Single Source of Truth
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="size-2 shrink-0 rounded-full bg-primary"></span>
+        Backend Engineering — TypeScript, Python, NestJS
+      </li>
+    </ul>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a
+        routerLink="/projects"
+        class="inline-flex items-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+      >
+        View Projects
+      </a>
+      <a
+        routerLink="/contact"
+        class="inline-flex items-center rounded-md border border-border bg-transparent px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-card"
+      >
+        Contact
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Snapshot -->
+<section class="px-4 pb-16 pt-24">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-foreground">What I Do</h2>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @for (card of capabilities; track card.title) {
+        <article
+          class="rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/40"
+        >
+          <div class="mb-4 text-3xl" aria-hidden="true">{{ card.icon }}</div>
+          <h3 class="mb-2 text-lg font-semibold text-foreground">{{ card.title }}</h3>
+          <p class="text-sm leading-relaxed text-muted-foreground">{{ card.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
 </section>
