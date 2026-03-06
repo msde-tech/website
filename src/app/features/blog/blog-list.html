@@ -1,3 +1,57 @@
-<section class="min-h-screen px-4 pt-20">
-  <h1 class="text-3xl font-bold text-foreground">Blog</h1>
+<section class="min-h-screen pt-24 pb-16 px-4 max-w-4xl mx-auto">
+  <!-- Page header -->
+  <div class="mb-10">
+    <h1 class="text-4xl font-bold text-foreground mb-3">Blog</h1>
+    <p class="text-muted-foreground text-lg">
+      Thoughts on data engineering, architecture, and building reliable systems.
+    </p>
+  </div>
+
+  <!-- Tag filter bar -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <button
+      (click)="clearFilter()"
+      [class]="selectedTag() === null
+        ? 'px-3 py-1 text-xs rounded-full border cursor-pointer bg-primary text-primary-foreground border-primary'
+        : 'px-3 py-1 text-xs rounded-full border cursor-pointer bg-secondary/50 border-border text-muted-foreground hover:text-foreground transition-colors'"
+    >
+      All
+    </button>
+    @for (tag of content.allTags(); track tag) {
+      <button
+        (click)="selectTag(tag)"
+        [class]="selectedTag() === tag
+          ? 'px-3 py-1 text-xs rounded-full border cursor-pointer bg-primary text-primary-foreground border-primary'
+          : 'px-3 py-1 text-xs rounded-full border cursor-pointer bg-secondary/50 border-border text-muted-foreground hover:text-foreground transition-colors'"
+      >
+        {{ tag }}
+      </button>
+    }
+  </div>
+
+  <!-- Post list -->
+  @for (post of filteredPosts(); track post.slug) {
+    <article class="bg-card/50 border border-border rounded-lg p-6 mb-4 hover:border-primary/30 transition-colors">
+      <a [routerLink]="['/blog', post.slug]" class="block">
+        <h2 class="text-xl font-semibold text-foreground mb-2 hover:text-primary transition-colors">
+          {{ post.title }}
+        </h2>
+      </a>
+      <div class="flex items-center gap-3 text-sm text-muted-foreground mb-3">
+        <span>{{ post.date | date: 'MMMM d, yyyy' }}</span>
+        <span class="text-border">·</span>
+        <span>{{ post.readingTime }}</span>
+      </div>
+      <p class="text-muted-foreground mb-4">{{ post.summary }}</p>
+      <div class="flex flex-wrap gap-2">
+        @for (tag of post.tags; track tag) {
+          <span class="px-2 py-0.5 text-xs rounded-full bg-secondary/50 border border-border text-muted-foreground">
+            {{ tag }}
+          </span>
+        }
+      </div>
+    </article>
+  } @empty {
+    <p class="text-muted-foreground">No posts found.</p>
+  }
 </section>

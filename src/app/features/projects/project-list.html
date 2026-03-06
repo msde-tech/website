@@ -1,3 +1,45 @@
-<section class="min-h-screen px-4 pt-20">
-  <h1 class="text-3xl font-bold text-foreground">Projects</h1>
+<section class="min-h-screen pt-24 pb-16 px-4 max-w-5xl mx-auto">
+  <!-- Page header -->
+  <div class="mb-10">
+    <h1 class="text-4xl font-bold text-foreground mb-3">Projects</h1>
+    <p class="text-muted-foreground text-lg">
+      Engineering case studies from real-world data and software projects.
+    </p>
+  </div>
+
+  <!-- Project cards grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (project of content.allProjects(); track project.slug) {
+      <article class="bg-card/50 border border-border rounded-lg p-6 hover:border-primary/30 transition-colors flex flex-col">
+        <a [routerLink]="['/projects', project.slug]" class="block mb-3">
+          <h2 class="text-xl font-semibold text-foreground hover:text-primary transition-colors">
+            {{ project.title }}
+          </h2>
+        </a>
+
+        <span class="inline-block self-start px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary border border-primary/20 mb-3">
+          {{ project.industry }}
+        </span>
+
+        <p class="text-muted-foreground text-sm line-clamp-2 mb-4 flex-1">
+          {{ project.problem }}
+        </p>
+
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          @for (tech of project.techStack; track tech) {
+            <span class="px-2 py-0.5 text-xs rounded-full bg-secondary/50 border border-border text-muted-foreground">
+              {{ tech }}
+            </span>
+          }
+        </div>
+
+        <a
+          [routerLink]="['/projects', project.slug]"
+          class="text-sm text-primary hover:underline mt-auto"
+        >
+          Read Case Study →
+        </a>
+      </article>
+    }
+  </div>
 </section>
