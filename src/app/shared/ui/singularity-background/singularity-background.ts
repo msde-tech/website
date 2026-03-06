@@ -45,6 +45,8 @@ export class SingularityBackground implements OnInit, AfterViewInit, OnDestroy {
   private static readonly GRAVITY_STRENGTH = 8000;
   private static readonly MAX_FORCE = 2.5;
   private static readonly RING_COUNT = 4;
+  /** Golden angle (~137.5°) for uniform angular distribution of stream lines */
+  private static readonly GOLDEN_ANGLE = 137.5;
 
   ngOnInit(): void {
     this.reducedMotion = window.matchMedia(
@@ -217,7 +219,7 @@ export class SingularityBackground implements OnInit, AfterViewInit, OnDestroy {
     // Draw faint curved stream paths converging toward the singularity
     for (let i = 0; i < 6; i++) {
       const startX = this.width * (0.1 + i * 0.08);
-      const startY = this.height * (0.15 + ((i * 137.5) % 360) / 360 * 0.7);
+      const startY = this.height * (0.15 + ((i * SingularityBackground.GOLDEN_ANGLE) % 360) / 360 * 0.7);
       const cpX = (startX + sx) * 0.5 + Math.sin(this.time + i) * 40;
       const cpY = (startY + sy) * 0.5 + Math.cos(this.time + i * 0.7) * 30;
 
