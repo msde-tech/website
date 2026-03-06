@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "azure-lakehouse-platform",
+    "title": "Enterprise Lakehouse Platform on Azure",
+    "industry": "Financial Services",
+    "problem": "The client operated a fragmented data landscape with multiple legacy SQL Server instances, inconsistent ETL processes, and no centralized governance. Analytics teams spent 60% of their time finding and preparing data instead of analyzing it.",
+    "approach": "Designed and implemented a lakehouse architecture on Azure using Databricks and Delta Lake. Established a medallion architecture (bronze/silver/gold) with Unity Catalog for governance. Migrated 200+ existing ETL jobs to Databricks workflows with incremental processing.",
+    "architecture": "Azure Data Lake Storage Gen2 → Databricks (Delta Lake) → Unity Catalog → Power BI. Orchestration via Azure Data Factory. CI/CD with Azure DevOps pipelines for infrastructure (Terraform) and data pipeline code (dbx/Databricks Asset Bundles).",
+    "techStack": ["Azure", "Databricks", "Delta Lake", "Unity Catalog", "ADLS Gen2", "Azure Data Factory", "Power BI", "Terraform", "Python", "SQL"],
+    "results": "Reduced data preparation time by 65%. Enabled self-service analytics for 150+ users. Achieved full data lineage tracking. Cut monthly cloud costs by 30% through optimized cluster policies and spot instances.",
+    "responsibilities": ["Architecture design and technical leadership", "Unity Catalog governance model", "Medallion layer implementation", "Migration strategy for legacy ETL", "Performance optimization and cost management", "Team mentoring and knowledge transfer"]
+  },
+  {
+    "slug": "real-time-data-pipeline",
+    "title": "Real-Time Data Pipeline with Quality Gates",
+    "industry": "E-Commerce / Retail",
+    "problem": "The client's data pipelines ran exclusively as nightly batch jobs, causing a 24-hour delay in reporting. Data quality issues were only discovered after business reports were already generated, leading to distrust in the data platform.",
+    "approach": "Implemented near-real-time streaming pipelines alongside existing batch processes. Built a comprehensive data quality framework with automated validation at each processing stage. Introduced monitoring dashboards and alerting for pipeline health and data quality metrics.",
+    "architecture": "Azure Event Hubs → Databricks Structured Streaming → Delta Lake (medallion layers) → Power BI DirectQuery. Quality framework using custom Python validation library integrated into each pipeline stage.",
+    "techStack": ["Azure Event Hubs", "Databricks", "Structured Streaming", "Delta Lake", "Python", "Power BI", "Azure Monitor", "Azure Functions"],
+    "results": "Reduced data latency from 24 hours to under 15 minutes. Data quality incidents dropped by 80%. Automated quality reports replaced manual spot-checks. Pipeline reliability improved to 99.5% uptime.",
+    "responsibilities": ["Streaming architecture design", "Data quality framework development", "Pipeline implementation and testing", "Monitoring and alerting setup", "Documentation and runbooks"]
+  },
+  {
+    "slug": "dwh-dimensional-model",
+    "title": "Dimensional Data Warehouse for BI Analytics",
+    "industry": "Manufacturing",
+    "problem": "Multiple business units used different reporting tools and definitions for the same KPIs. There was no single source of truth, leading to conflicting numbers in management meetings and delayed decision-making.",
+    "approach": "Designed a dimensional data warehouse using Kimball methodology. Created a bus matrix in collaboration with business stakeholders. Implemented conformed dimensions and standardized fact tables. Built semantic Power BI models on top of the dimensional model.",
+    "architecture": "Source systems → Azure Data Factory (ELT) → Azure SQL Database (DWH) → Power BI semantic models → Power BI reports. Slowly changing dimensions (Type 2) for historical tracking. Row-level security in Power BI aligned with organizational hierarchy.",
+    "techStack": ["Azure SQL Database", "Azure Data Factory", "Power BI", "DAX", "SQL", "Terraform", "Azure DevOps"],
+    "results": "Established a single source of truth for 25+ KPIs. Reduced report generation from days to minutes. Enabled self-service BI for 80+ users across 5 departments. Monthly reporting cycle shortened by 70%.",
+    "responsibilities": ["Dimensional model design (bus matrix, star schemas)", "ETL pipeline development", "Power BI semantic model and report creation", "Row-level security implementation", "Stakeholder workshops and requirements gathering"]
+  },
+  {
+    "slug": "backend-api-platform",
+    "title": "Event-Driven Backend Platform for Data Processing",
+    "industry": "Technology / SaaS",
+    "problem": "The client's monolithic backend struggled to handle increasing data processing volumes. Job failures cascaded through the system, processing times were unpredictable, and there was no visibility into job status or queue health.",
+    "approach": "Redesigned the backend as a modular NestJS application with event-driven job processing via BullMQ and Redis. Implemented priority queues, dead-letter handling, and comprehensive monitoring. Built a management API for job tracking and system health.",
+    "architecture": "NestJS API → BullMQ queues → Redis (state + cache) → PostgreSQL (persistence). Health monitoring via custom endpoints + Prometheus metrics. Containerized with Docker, orchestrated on Kubernetes.",
+    "techStack": ["NestJS", "TypeScript", "BullMQ", "Redis", "PostgreSQL", "Docker", "Kubernetes", "Prometheus", "Grafana"],
+    "results": "Processing throughput increased by 300%. Job completion rate improved to 99.7%. Zero data loss during infrastructure incidents. Processing costs reduced by 40% through efficient resource utilization.",
+    "responsibilities": ["Architecture design and technical leadership", "NestJS application development", "Queue system design and implementation", "Monitoring and observability setup", "CI/CD pipeline configuration", "Code review and team mentoring"]
+  }
+]
