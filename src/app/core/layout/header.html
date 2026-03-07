@@ -1,0 +1,128 @@
+<header class="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+    <a routerLink="/" class="text-xl font-bold tracking-tight text-primary" (click)="closeMenu()">
+      MSDE
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden items-center gap-6 md:flex">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="text-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/services"
+          routerLinkActive="text-primary"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Services
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/blog"
+          routerLinkActive="text-primary"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Blog
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/projects"
+          routerLinkActive="text-primary"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Projects
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/contact"
+          routerLinkActive="text-primary"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile menu button -->
+    <button
+      class="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground md:hidden"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-label="Toggle navigation menu"
+    >
+      @if (mobileMenuOpen()) {
+        <ng-icon name="lucideX" class="text-xl" />
+      } @else {
+        <ng-icon name="lucideMenu" class="text-xl" />
+      }
+    </button>
+  </nav>
+
+  <!-- Mobile nav -->
+  @if (mobileMenuOpen()) {
+    <ul class="flex flex-col gap-2 border-t border-border/40 px-4 py-4 md:hidden">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="text-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          (click)="closeMenu()"
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/services"
+          routerLinkActive="text-primary"
+          class="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          (click)="closeMenu()"
+        >
+          Services
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/blog"
+          routerLinkActive="text-primary"
+          class="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          (click)="closeMenu()"
+        >
+          Blog
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/projects"
+          routerLinkActive="text-primary"
+          class="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          (click)="closeMenu()"
+        >
+          Projects
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/contact"
+          routerLinkActive="text-primary"
+          class="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          (click)="closeMenu()"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  }
+</header>
