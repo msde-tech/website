@@ -1,59 +1,141 @@
-# MsdeWebsite
+# MSDE Tech — Personal Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+A modern, engineering-driven personal website for a Data Engineer & Software Engineer. Built with Angular 21, Spartan UI, and TailwindCSS.
 
-## Development server
-
-To start a local development server, run:
+## Quick Start
 
 ```bash
-ng serve
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+# → http://localhost:4200
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Lint
+npm run lint
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Project Structure
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+src/
+  app/
+    core/
+      layout/          # Header, Footer, Shell (app shell wrapper)
+      models/          # TypeScript interfaces (BlogPost, Project)
+      services/        # ContentService (loads blog/project data)
+    shared/
+      ui/              # Shared UI components (SingularityBackground)
+    features/
+      home/            # Landing page with hero + capability cards
+      services/        # Services listing page
+      blog/            # Blog list + detail pages
+      projects/        # Project list + detail pages
+      contact/         # Contact form with validation
+content/
+  blog/posts.json      # Blog post data
+  projects/projects.json # Project case study data
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Routes
 
-```bash
-ng generate --help
+| Route               | Page              |
+| ------------------- | ----------------- |
+| `/`                 | Home / Landing    |
+| `/services`         | Services          |
+| `/blog`             | Blog listing      |
+| `/blog/:slug`       | Blog post detail  |
+| `/projects`         | Project listing   |
+| `/projects/:slug`   | Project detail    |
+| `/contact`          | Contact form      |
+
+## Adding Content
+
+### Blog Posts
+
+Edit `content/blog/posts.json`. Each post has:
+
+```json
+{
+  "slug": "my-post-slug",
+  "title": "Post Title",
+  "date": "2025-11-15",
+  "tags": ["data-engineering", "azure"],
+  "summary": "A short summary of the post.",
+  "readingTime": "5 min",
+  "content": "## Heading\n\nParagraph text.\n\n- List item 1\n- List item 2"
+}
 ```
 
-## Building
+The content field supports a subset of markdown: `## ` headings, `### ` subheadings, `- ` list items, and paragraphs separated by blank lines.
 
-To build the project run:
+### Projects
 
-```bash
-ng build
+Edit `content/projects/projects.json`. Each project has:
+
+```json
+{
+  "slug": "project-slug",
+  "title": "Project Title",
+  "industry": "Industry Name",
+  "problem": "Description of the problem.",
+  "approach": "How the problem was solved.",
+  "architecture": "Technical architecture description.",
+  "techStack": ["Azure", "Databricks", "Python"],
+  "results": "Outcomes and metrics.",
+  "responsibilities": ["Item 1", "Item 2"]
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Contact Form
 
-## Running unit tests
+The contact form includes validation and a honeypot field for spam prevention. Currently, form submission is simulated (no backend endpoint).
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+To wire up a real endpoint, update the `onSubmit()` method in `src/app/features/contact/contact.ts`:
 
-```bash
-ng test
+```typescript
+// Replace the simulated delay with an actual API call:
+const response = await fetch('/api/contact', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: this.form.value.name,
+    email: this.form.value.email,
+    subject: this.form.value.subject,
+    message: this.form.value.message,
+  }),
+});
+if (!response.ok) throw new Error('Failed to send');
 ```
 
-## Running end-to-end tests
+Options for the backend:
+- **Azure Functions** or **AWS Lambda** — serverless endpoint that sends an email
+- **Formspree / Formcarry** — third-party form service
+- **Self-hosted** — NestJS/Express API with email sending
 
-For end-to-end (e2e) testing, run:
+## Tech Stack
 
-```bash
-ng e2e
-```
+- **Angular 21** with standalone components
+- **Spartan UI** (helm) — headless UI components for Angular
+- **TailwindCSS v4** — utility-first CSS
+- **Vitest** — unit testing
+- **ng-icons** (Lucide) — icon library
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Theme
 
-## Additional Resources
+The site uses a dark navy + orange accent theme inspired by a "singularity / event horizon" visual concept. Theme colors are defined as CSS custom properties in `src/styles.css` and are compatible with Spartan UI's design token system.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Animated Background
+
+The `SingularityBackground` component renders a Canvas-based particle animation:
+- Particles drift from left to right, converging toward an orange singularity
+- Respects `prefers-reduced-motion` (static frame when enabled)
+- devicePixelRatio-aware with ResizeObserver
+- Runs behind all content with `position: fixed; z-index: -1`
